@@ -8,14 +8,14 @@ public class Git {
     }
     public void initRepo() throws IOException
     {
-        if(new File("git/objects/index").exists())
+        if(new File("git/index").exists())
         {
             System.out.println("Git Repository already exists");
         }
         else{
             File objects = new File("git/objects");
             objects.mkdirs();
-            File index = new File("git/objects/index");
+            File index = new File("git/index");
             index.createNewFile();
         }
     }

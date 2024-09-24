@@ -34,7 +34,7 @@ public class Blob
                 bufferWritter.write(contents, 0, contents.length());
                 bufferWritter.close();
 
-                File index = new File("git/objects/index"); // this part adds it to index
+                File index = new File("git/index"); // this part adds it to index
                 FileWriter fileWritter2 = new FileWriter(index,true);
                 BufferedWriter bufferWritter2 = new BufferedWriter(fileWritter2);
                 bufferWritter2.write(hashName + " " + fileName + "\n", 0, hashName.length() + fileName.length() + 2);
