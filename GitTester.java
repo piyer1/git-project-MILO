@@ -6,8 +6,7 @@ import java.io.IOException;
 public class GitTester
 {
     public static void main(String [] args) throws IOException
-    {
-        boolean compressed = true; // global variable
+    {    
         Git banana = new Git();
         banana.checkAndDeleteRepo();
         banana.initRepo();
@@ -28,14 +27,16 @@ public class GitTester
         // bufferWritter2.write("this is a second test for secret reasons", 0, 40);
         // bufferWritter2.close();
 
-        Blob bouba = new Blob("testFile.txt", compressed); // testing the compression features
+        Blob bouba = new Blob("testFile.txt", Git.COMPRESS); // testing the compression features
         String compressedHashName1 = bouba.toSHA1(bouba.compress("this is a test").getBytes());
         String compressedHashName2 = bouba.getHashName();
         if(compressedHashName1.equals(compressedHashName2))
         {
             System.out.println("Compression seems to work as intended.");
         }
-        // Blob bouba2 = new Blob("testFile2.txt", compressed);
+        Blob bouba2 = new Blob("testFile2.txt", Git.COMPRESS);
+
+        Blob jacobISpentTwoHoursDebuggingThisCode = new Blob("test", Git.COMPRESS);
     
       //   deleteRepo deletes EVERYTHING in git directory, including the directory itself
       //   so only do it when you want to reset it all

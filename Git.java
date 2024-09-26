@@ -3,6 +3,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class Git {
+    //global variable to enable or disable compressing
+    public static final boolean COMPRESS = false;
+
     public Git () {
 
     }
