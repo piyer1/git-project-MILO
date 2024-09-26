@@ -36,9 +36,9 @@ public class Blob
                     if (!blobFile.equals(child)){
                         Blob tempBlob = new Blob (child.toPath().toString(), Git.COMPRESS);
                         if (tempBlob.isDirectory())
-                            writer.write ("tree " + tempBlob.getHashName() + " " + tempBlob.getFileName() + "\n");
+                            writer.write ("tree " + tempBlob.getHashName() + " " + child.getName() + "\n");
                         else
-                            writer.write ("blob " + tempBlob.getHashName() + " " + tempBlob.getFileName() + "\n");
+                            writer.write ("blob " + tempBlob.getHashName() + " " + child.getName() + "\n");
                     }
                 }
                 writer.close();
