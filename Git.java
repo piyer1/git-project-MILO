@@ -27,8 +27,9 @@ public class Git {
 
     public static String commit(String author, String message) throws IOException{
         File index = new File ("git/index");
-        File head = new File("git/HEAD");
         String tree = Blob.generateName(index, false);
+        File treeFile = new File("git/objects/"+ tree);
+        Blob.writeData(treeFile, Blob.getData(index));
         String parent = Blob.getData(new File("git/HEAD"));
         String date = LocalDate.now().toString();
         String commitData = ("tree: " + tree + "\n" + "parent: " + parent + "\n" + "author: " + author + "\n" + "date: " + date + "\n" + "message: " + message + "\n");
@@ -52,6 +53,7 @@ public class Git {
             head.createNewFile();
         }
         Blob.writeData(head, commitHash);
+        
     }
 
     public void checkAndDeleteRepo() // checks and deletes git directory and everything inside
