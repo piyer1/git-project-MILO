@@ -82,7 +82,7 @@ public class Blob
     }
 
     // takes a String of data and uses SHA1 to turn it into a unique filename String; all me baby
-    public String generateName(File file, boolean compressed) throws IOException 
+    public static String generateName(File file, boolean compressed) throws IOException 
     {
         String data = getData(file); //first we get the data inside the file
         if(compressed) // then we may or may not compress the data
@@ -92,7 +92,7 @@ public class Blob
     }
 
     // reads and returns the data from a file; written all by myself :)
-    public String getData(File file) throws IOException 
+    public static String getData(File file) throws IOException 
     {
         FileReader reader = new FileReader(file);
         BufferedReader bReader = new BufferedReader(reader);
@@ -104,9 +104,18 @@ public class Blob
         return data.toString();
     }
 
+    // reads and returns the data from a file; written all by myself :)
+    public static void writeData(File file, String string) throws IOException 
+    {
+        FileWriter writer = new FileWriter(file);
+        BufferedWriter bWriter = new BufferedWriter(writer);
+        bWriter.write(string);
+        bWriter.close();
+    }
+
     //converts a byte array into SHA1; 
     //https://stackoverflow.com/questions/4895523/java-string-to-sha1
-    public String toSHA1(byte[] convertme) { 
+    public static String toSHA1(byte[] convertme) { 
         MessageDigest md = null; //don't really understand what any of this does, but it works
         try {
             md = MessageDigest.getInstance("SHA-1");
@@ -119,7 +128,7 @@ public class Blob
 
     //converts byte array into a hex string. part of the SHA1 conversion process; 
     // https://stackoverflow.com/questions/4895523/java-string-to-sha1
-    public String byteArrayToHexString(byte[] b) { 
+    public static String byteArrayToHexString(byte[] b) { 
         String result = "";
         for (int i=0; i < b.length; i++) {
           result +=
@@ -130,7 +139,7 @@ public class Blob
 
     //compresses a string. source is 
     // https://stackoverflow.com/questions/3649485/how-to-compress-a-string-in-java
-    public String compress(String str) throws IOException { 
+    public static String compress(String str) throws IOException { 
         if (str == null || str.length() == 0) {
             return str;
         }

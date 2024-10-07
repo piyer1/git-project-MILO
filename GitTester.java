@@ -19,15 +19,22 @@ public class GitTester
         bufferWritter.write("this is a test", 0, 14);
         bufferWritter.close();
     
-        // File test2 = new File("testFile2.txt");
-        // if(test2.exists()) 
-        //     test2.delete(); //RESETS it if needed
-        // FileWriter fileWritter2 = new FileWriter(test2,true);
-        // BufferedWriter bufferWritter2 = new BufferedWriter(fileWritter2);
-        // bufferWritter2.write("this is a second test for secret reasons", 0, 40);
-        // bufferWritter2.close();
+        File test2 = new File("testFile2.txt");
+        if(test2.exists()) 
+            test2.delete(); //RESETS it if needed
+        FileWriter fileWritter2 = new FileWriter(test2,true);
+        BufferedWriter bufferWritter2 = new BufferedWriter(fileWritter2);
+        bufferWritter2.write("this is a second test for secret reasons", 0, 40);
+        bufferWritter2.close();
 
-        Blob bouba = new Blob("testFile.txt", Git.COMPRESS); // testing the compression features
+        Git.stage(test.getPath());
+        Git.stage(test2.getPath());
+
+        Git.commit("Pranav Iyer", "testing commit method");
+
+        
+
+        /*Blob bouba = new Blob("testFile.txt", Git.COMPRESS); // testing the compression features
         String compressedHashName1 = bouba.toSHA1(bouba.compress("this is a test").getBytes());
         String compressedHashName2 = bouba.getHashName();
         if(compressedHashName1.equals(compressedHashName2))
@@ -40,6 +47,6 @@ public class GitTester
     
       //   deleteRepo deletes EVERYTHING in git directory, including the directory itself
       //   so only do it when you want to reset it all
-
+    */
     }
 }
