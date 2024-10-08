@@ -105,9 +105,10 @@ public class Blob
     }
 
     // reads and returns the data from a file; written all by myself :)
-    public static void writeData(File file, String string) throws IOException 
+    //if append = true, doesn't overwrite
+    public static void writeData(File file, String string, boolean append) throws IOException 
     {
-        FileWriter writer = new FileWriter(file, true);
+        FileWriter writer = new FileWriter(file, append);
         BufferedWriter bWriter = new BufferedWriter(writer);
         bWriter.write(string);
         bWriter.close();

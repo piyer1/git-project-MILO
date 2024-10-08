@@ -30,7 +30,7 @@ public class GitTester
         Git.stage(test.getPath());
         Git.stage(test2.getPath());
 
-        Git.commit("Pranav Iyer", "testing commit method");
+        String commit1Hash = Git.commit("Pranav Iyer", "testing commit method");
 
         File test3 = new File("testFolder/");
         if (!test3.exists()){
@@ -40,12 +40,14 @@ public class GitTester
         if (!test4.exists()){
             boolean bool2 = test4.createNewFile();
         }
-        Blob.writeData(test4, "another test for folders");
+        Blob.writeData(test4, "another test for folders", true);
 
         Git.stage(test3.getPath());
         Git.stage(test4.getPath());
 
-        Git.commit("Pranav Iyer", "testing commit method for folders");
+        String commit2Hash = Git.commit("Pranav Iyer", "testing commit method for folders");
+
+        Git.checkout(commit1Hash);
 
         /*Blob bouba = new Blob("testFile.txt", Git.COMPRESS); // testing the compression features
         String compressedHashName1 = bouba.toSHA1(bouba.compress("this is a test").getBytes());
