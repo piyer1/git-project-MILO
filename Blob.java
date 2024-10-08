@@ -107,7 +107,7 @@ public class Blob
     // reads and returns the data from a file; written all by myself :)
     public static void writeData(File file, String string) throws IOException 
     {
-        FileWriter writer = new FileWriter(file);
+        FileWriter writer = new FileWriter(file, true);
         BufferedWriter bWriter = new BufferedWriter(writer);
         bWriter.write(string);
         bWriter.close();
