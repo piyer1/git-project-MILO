@@ -30,6 +30,7 @@ public class Git {
     //returns commit hash
     public static String commit(String author, String message) throws IOException{
         updateIndex();
+        File head = new File("git/HEAD");
         File index = new File ("git/index");
         String tree = Blob.generateName(index, false);
         File treeFile = new File("git/objects/"+ tree);
@@ -38,6 +39,7 @@ public class Git {
         String date = LocalDate.now().toString();
         String commitData = ("tree: " + tree + "\n" + "parent: " + parent + "\n" + "author: " + author + "\n" + "date: " + date + "\n" + "message: " + message + "\n");
         String commitHash = Blob.toSHA1(commitData.getBytes());
+        Blob.writeData(head, commitHash, true);
         File commit = new File("git/objects/" + commitHash);
         Blob.writeData(commit, commitData, true);
         if (index.delete()){
