@@ -27,10 +27,10 @@ public class GitTester
         bufferWritter2.write("this is a second test for secret reasons", 0, 40);
         bufferWritter2.close();
 
-        Git.stage(test.getPath());
-        Git.stage(test2.getPath());
+        banana.stage(test.getPath());
+        banana.stage(test2.getPath());
 
-        String commit1Hash = Git.commit("Pranav Iyer", "testing commit method");
+        String commit1Hash = banana.commit("Pranav Iyer", "testing commit method");
 
         File test3 = new File("testFolder/");
         if (!test3.exists()){
@@ -42,12 +42,12 @@ public class GitTester
         }
         Blob.writeData(test4, "another test for folders", true);
 
-        Git.stage(test3.getPath());
-        Git.stage(test4.getPath());
+        banana.stage(test3.getPath());
+        banana.stage(test4.getPath());
 
-        String commit2Hash = Git.commit("Pranav Iyer", "testing commit method for folders");
+        String commit2Hash = banana.commit("Pranav Iyer", "testing commit method for folders");
 
-        Git.checkout(commit1Hash);
+        banana.checkout(commit1Hash);
 
         /*Blob bouba = new Blob("testFile.txt", Git.COMPRESS); // testing the compression features
         String compressedHashName1 = bouba.toSHA1(bouba.compress("this is a test").getBytes());
