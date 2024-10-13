@@ -125,9 +125,6 @@ public class Git implements GitInterface{
         br.close();
         File treeFile = new File("git/objects/" + tree);
         Blob.writeData(index, Blob.getData(treeFile), false);
-        if (index.delete()){
-            index.createNewFile();
-        }
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

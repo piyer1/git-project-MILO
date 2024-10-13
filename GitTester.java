@@ -10,6 +10,7 @@ public class GitTester
         banana.checkAndDeleteRepo();
         banana.initRepo();
 
+        //EXTRA TESTING, BUT NOT REQUIRED, UNCOMMENTED STUFF SHOULD BE ENOUGH
         /*File test = new File("testFile.txt"); //these two chunks of code are only used if you want to create new files or reset old ones
         if(test.exists())
             test.delete(); //RESETS it if needed
@@ -42,7 +43,7 @@ public class GitTester
         Blob.writeData(test4, "another test for folders", true);
 
         banana.stage(test3.getPath());
-        
+
         String commit1Hash = banana.commit("Pranav Iyer", "testing commit method");
 
         Blob.writeData(test4, "\n" + "test for changing existing file", true);
@@ -51,9 +52,7 @@ public class GitTester
 
         String commit2Hash = banana.commit("Pranav Iyer", "testing commit method for folders");
 
-
-
-        //banana.checkout(commit1Hash);
+        banana.checkout(commit1Hash);
 
         /*Blob bouba = new Blob("testFile.txt", Git.COMPRESS); // testing the compression features
         String compressedHashName1 = bouba.toSHA1(bouba.compress("this is a test").getBytes());
