@@ -67,17 +67,57 @@ public class Blob
             }
             reader.close();
             if (!isInIndex){
-                File indexFile = new File("git/index"); // this part adds it to index
-                BufferedWriter bufferWritter2 = new BufferedWriter(new FileWriter(indexFile,true));
-                if (isDirectory)
-                    bufferWritter2.write("tree " + hashName + " " + fileName + "\n");
-                else
-                    bufferWritter2.write("blob " + hashName + " " + fileName + "\n");
-                bufferWritter2.close();
+                boolean isDuplicate = false;
+                String lineFound = "";
+                File indexFile = new File("./git/index"); // this part adds it to index
+                try (BufferedReader br = new BufferedReader(new FileReader(indexFile))) {
+                    String lineRead;
+                    while ((lineRead = br.readLine()) != null) {
+                        String lineModify = lineRead + "end";
+                        if (lineModify.contains(pathName + "end")) {
+                            lineFound = lineRead;
+                            isDuplicate = true;
+                        }
+                    }
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                if (isDuplicate){
+                    replaceLine("./git/index", lineFound, index);
+                }
+                else{
+                    writeData(indexFile, index + "\n", true);
+                }
             }
         }
         else{
             throw new NoSuchFileException(pathName); //how to get fileName if it doesn't exist?
+        }
+    }
+
+    public static void replaceLine(String filePath, String lineToDelete, String lineToReplace){
+        try {
+            File file = new File(filePath);
+            File tempIndexFile = new File("tempIndex");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempIndexFile, false));
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line = br.readLine();
+            while (line != null){
+                if (line.equals(lineToDelete)){
+                    writer.write(lineToReplace + "\n");
+                }
+                else{
+                    writer.write(line + "\n");
+                }
+                line = br.readLine();
+            }
+            writer.close();
+            br.close();
+            boolean bool1 = tempIndexFile.renameTo(file);
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

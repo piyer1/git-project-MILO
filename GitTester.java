@@ -1,6 +1,5 @@
-import java.io.BufferedWriter;
+
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
 public class GitTester
@@ -11,7 +10,7 @@ public class GitTester
         banana.checkAndDeleteRepo();
         banana.initRepo();
 
-        File test = new File("testFile.txt"); //these two chunks of code are only used if you want to create new files or reset old ones
+        /*File test = new File("testFile.txt"); //these two chunks of code are only used if you want to create new files or reset old ones
         if(test.exists())
             test.delete(); //RESETS it if needed
         FileWriter fileWritter = new FileWriter(test,true);
@@ -30,7 +29,7 @@ public class GitTester
         banana.stage(test.getPath());
         banana.stage(test2.getPath());
 
-        String commit1Hash = banana.commit("Pranav Iyer", "testing commit method");
+        String commit1Hash = banana.commit("Pranav Iyer", "testing commit method");*/
 
         File test3 = new File("testFolder/");
         if (!test3.exists()){
@@ -42,11 +41,17 @@ public class GitTester
         }
         Blob.writeData(test4, "another test for folders", true);
 
-        banana.stage(test4.getPath());
+        banana.stage(test3.getPath());
+
+        Blob.writeData(test4, "\n" + "test for changing existing file", true);
+
+        banana.stage(test3.getPath());
 
         String commit2Hash = banana.commit("Pranav Iyer", "testing commit method for folders");
 
-        banana.checkout(commit1Hash);
+
+
+        //banana.checkout(commit1Hash);
 
         /*Blob bouba = new Blob("testFile.txt", Git.COMPRESS); // testing the compression features
         String compressedHashName1 = bouba.toSHA1(bouba.compress("this is a test").getBytes());
