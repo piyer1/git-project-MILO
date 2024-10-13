@@ -42,6 +42,8 @@ public class GitTester
         Blob.writeData(test4, "another test for folders", true);
 
         banana.stage(test3.getPath());
+        
+        String commit1Hash = banana.commit("Pranav Iyer", "testing commit method");
 
         Blob.writeData(test4, "\n" + "test for changing existing file", true);
 

@@ -80,7 +80,27 @@ public class Git implements GitInterface{
             }
             br.close();
             File treeFile = new File("git/objects/" + tree);
-            Blob.writeData(index, Blob.getData(treeFile), true);
+            BufferedReader brTree = new BufferedReader(new FileReader(treeFile));
+            String treeLine = brTree.readLine();
+            while (treeLine != null){
+                BufferedReader brIndex = new BufferedReader(new FileReader(index));
+                String indexLine = brIndex.readLine();
+                boolean isDuplicate = false;
+                while (indexLine != null){
+                    String fileIndexName = indexLine.substring(46);
+                    String fileTreeName = treeLine.substring(46);
+                    if (fileIndexName.equals(fileTreeName)){
+                        isDuplicate = true;
+                    }
+                    indexLine = brIndex.readLine();
+                }
+                if (!isDuplicate){
+                    Blob.writeData(index, treeLine + "\n", true);
+                }
+                brIndex.close();
+                treeLine = brTree.readLine();
+            }
+            brTree.close();
         }     
     }
 
